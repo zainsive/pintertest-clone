@@ -1,16 +1,30 @@
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import { HeaderLogo } from "./widgets/header-logo";
-import { Col, Row, Tag, Typography } from "antd";
+import { Col, Row } from "antd";
+import { useClickOutside } from "../../utils/clickhandler";
+import { MegaMenu } from "./widgets/mega-menu";
+import {
+  ArrowDownOutlined,
+  BellFilled,
+  CaretDownOutlined,
+  DownOutlined,
+  MessageOutlined,
+  NotificationOutlined,
+  SearchOutlined,
+  WechatOutlined,
+} from "@ant-design/icons";
 
 interface Props {}
 export const Header = ({}: Props) => {
   const [showMenu, setShowMenu] = useState<boolean>(false);
-
-  const { Title, Text } = Typography;
+  const menuRef = useRef(null);
 
   const onHeaderPrimaryClick = () => {
     setShowMenu(!showMenu);
   };
+  useClickOutside(menuRef, () => {
+    setShowMenu(false);
+  });
   return (
     <>
       <Row className="header-wrapper">
@@ -22,56 +36,24 @@ export const Header = ({}: Props) => {
             />
           </div>
         </Col>
-        <Col span={20}></Col>
+        <Col lg={18} xl={21} md={18} sm={12} xs={12}>
+          <div className="header-icon-wrapper">
+            <SearchOutlined className="header-icon" />
+            <BellFilled className="header-icon" />
+            <MessageOutlined className="header-icon" />
+            <NotificationOutlined className="header-icon" />
+            <img
+              className="header-icon"
+              src="./images/zainkh.jpg"
+              height={24}
+              width={24}
+              alt="zainkh"
+            />
+            <CaretDownOutlined className="header-icon-dowpdown" />
+          </div>
+        </Col>
       </Row>
-      <div
-        className="mega-menu-wrapper"
-        style={{ display: showMenu ? "block" : "none" }}
-      >
-        <Row>
-          <Col span={4} className="mega-menu-column">
-            <Title className="mega-menu-title">Shortcuts</Title>
-            <div>
-              <Text className="mega-menu-item">Business Hub</Text>
-              <Text className="mega-menu-item">Home Feed</Text>
-            </div>
-          </Col>
-          <Col span={4} className="mega-menu-column">
-            <Title className="mega-menu-title">Create</Title>
-            <div>
-              <Text className="mega-menu-item">Paid</Text>
-              <Text className="mega-menu-item">
-                Create Pin for ad <Tag color="#55acee">Beta</Tag>
-              </Text>
-              <Text className="mega-menu-item">Create Pin for Idea ad</Text>
-              <Text className="mega-menu-item">Create Pin </Text>
-            </div>
-          </Col>
-
-          <Col span={4} className="mega-menu-column">
-            <Title className="mega-menu-title">Create</Title>
-            <div>
-              <Text className="mega-menu-item">Paid</Text>
-              <Text className="mega-menu-item">
-                Create Pin for ad <Tag color="#55acee">Beta</Tag>
-              </Text>
-              <Text className="mega-menu-item">Create Pin for Idea ad</Text>
-              <Text className="mega-menu-item">Create Pin</Text>
-            </div>
-          </Col>
-          <Col span={4} className="mega-menu-column">
-            <Title className="mega-menu-title">Analytics</Title>
-            <div>
-              <Text className="mega-menu-item">Overview</Text>
-              <Text className="mega-menu-item">Audience insights</Text>
-              <Text className="mega-menu-item">
-                Conversion insights <Tag color="#55acee">Beta</Tag>
-              </Text>
-              <Text className="mega-menu-item">Trends</Text>
-            </div>
-          </Col>
-        </Row>
-      </div>
+      <MegaMenu ref={menuRef} visible={showMenu} />
     </>
   );
 };
