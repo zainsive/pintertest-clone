@@ -1,15 +1,17 @@
 import { Row, Col, Tag, Typography } from "antd";
+import { useClickOutside } from "../../../utils/clickHandler";
+import { useRef } from "react";
 
 interface Props {
-  ref: any;
   visible: boolean;
+  setVisible: (vissible: boolean) => void;
 }
-export const MegaMenu = ({ ref, visible }: Props) => {
+export const MegaMenu = ({ visible, setVisible }: Props) => {
   const { Title, Text } = Typography;
+
   return (
     <div
       className="mega-menu-wrapper"
-      ref={ref}
       style={{ display: visible ? "block" : "none" }}
     >
       <Row>

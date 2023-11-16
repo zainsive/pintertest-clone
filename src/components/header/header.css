@@ -27,6 +27,11 @@
 /* mega menu */
 .mega-menu-wrapper {
   padding: 20px 20px;
+  background-color: white;
+  position: absolute;
+  width: 100%;
+  top: 23;
+  left: 0;
 }
 .mega-menu-column {
   display: flex;

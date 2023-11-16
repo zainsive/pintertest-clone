@@ -1,0 +1,31 @@
+.home-tabs-wrapper {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 32px;
+}
+.home-tab {
+  padding: 8px 8px;
+  border-radius: 6px;
+  font-weight: 600;
+  position: relative;
+  cursor: pointer;
+}
+.home-tab:hover {
+  background-color: rgb(238, 238, 238);
+}
+.home-tabs-wrapper .active {
+  background-color: rgb(255, 255, 255);
+}
+.home-tabs-wrapper .active:after {
+  content: "";
+  position: absolute;
+  bottom: 0px;
+  top: 34px;
+  left: 0;
+  right: 0;
+  background: black;
+  height: 4px;
+  border-radius: 10px;
+}
